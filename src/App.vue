@@ -5,15 +5,18 @@
 <template>
   <div>
     <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+    <router-view />
   </div>
-</template>
+</template>bout
 
 <style scoped>
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
+  transition: filter 30000ms;
 }
 
 .logo:hover {
