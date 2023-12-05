@@ -28,6 +28,10 @@ const routes = [
     name: "Panama",
     component: () => import("@/views/Panama.vue"),
   },
+  {
+    path: "/destination/:id",
+    component: () => import("@/views/DestinationDetails.vue"),
+  },
 ];
 
 const router = createRouter({
