@@ -1,13 +1,13 @@
 <template>
-  <section :class="destination.name.toLowerCase()" class="destination">
+  <section v-if="destination" :class="destination.name.toLowerCase()" class="destination">
     <h1>{{ destination.name }}</h1>
     <div class="destination-details">
       <img :src="`/images/${destination.image}`" :alt="destination.name" />
       <p>{{ destination.description }} </p>
     </div>
 
-    <ul class="experience">
-      <li v-for="experience in destination.experiences" :key="experience.id">
+    <ul v-if="experiences" class="experience">
+      <li v-for="experience in experiences" :key="experience.id">
         <h3>
           {{ experience.name }}
 
@@ -25,6 +25,11 @@ import sourceData from '@/data.json'
 
 export default {
   name: "DestinationDetails",
+  data() {
+    return {
+      experiences: null
+    }
+  },
   computed: {
     destinationId() {
       return parseInt(this.$route.params.id)
@@ -33,9 +38,23 @@ export default {
       return sourceData.destinations.find(
         destination => destination.id === this.destinationId
       )
+    },
+
+  },
+  methods: {
+    async fetchExperiences() {
+      const detailsUrl = `https://travel-dummy-api.netlify.app/${this.$route.params.slug}.json`
+      const response = await fetch(detailsUrl)
+      const data = await response.json()
+      this.experiences = data.experiences
     }
+  },
+  async created() {
+    this.fetchExperiences()
+    this.$watch(() => this.$route.params, this.fetchExperiences)
   }
-};
+
+}
 
 
 </script>
