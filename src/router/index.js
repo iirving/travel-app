@@ -12,6 +12,11 @@ const routes = [
     path: "/destination/:id/:slug",
     name: "destination.details",
     component: () => import("@/views/DestinationDetails.vue"),
+    props: (route) => {
+      const id = Number(route.params.id);
+      const slug = route.params.slug;
+      return { id, slug };
+    },
   },
 ];
 

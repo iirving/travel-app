@@ -22,28 +22,36 @@
 
 <script>
 import sourceData from '@/data.json'
+import { stringifyQuery } from 'vue-router'
 
 export default {
   name: "DestinationDetails",
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    slug: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       experiences: null
     }
   },
   computed: {
-    destinationId() {
-      return parseInt(this.$route.params.id)
-    },
     destination() {
       return sourceData.destinations.find(
-        destination => destination.id === this.destinationId
+        destination => destination.id === this.id
       )
     },
 
   },
   methods: {
     async fetchExperiences() {
-      const detailsUrl = `https://travel-dummy-api.netlify.app/${this.$route.params.slug}.json`
+      const detailsUrl = `https://travel-dummy-api.netlify.app/${this.slug}.json`
       const response = await fetch(detailsUrl)
       const data = await response.json()
       this.experiences = data.experiences
