@@ -30,6 +30,7 @@ const routes = [
   },
   {
     path: "/destination/:id",
+    name: "destination.details",
     component: () => import("@/views/DestinationDetails.vue"),
   },
 ];
