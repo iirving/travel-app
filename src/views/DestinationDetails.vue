@@ -1,30 +1,34 @@
 <template>
-  <section v-if="destination" :class="destination.name.toLowerCase()" class="destination">
-    <h1>{{ destination.name }}</h1>
-    <GoBack />
+  <div>
 
-    <div class="destination-details">
-      <img :src="`/images/${destination.image}`" :alt="destination.name" />
-      <p>{{ destination.description }} </p>
-    </div>
-  </section>
+    <section v-if="destination" :class="destination.name.toLowerCase()" class="destination">
+      <h1>{{ destination.name }}</h1>
+      <GoBack />
 
-  <section v-if="experiences" class="experiences">
-    <h2>Top Experiences in {{ destination.name }}</h2>
-    <p>Check out these awesome experiences</p>
-    <div class="cards">
-      <router-link v-for="experience in experiences" :key="experience.slug" :to="{
-        name: 'experience.details',
-        params: {
-          experienceSlug: experience.slug,
-          id: destination.id
-        }
-      }" :title="experience.name" :aria-label="`View details for ${experience.name}`">
-        <ExperienceCard :experience="experience" />
-      </router-link>
-    </div>
-    <router-view />
-  </section>
+      <div class="destination-details">
+        <img :src="`/images/${destination.image}`" :alt="destination.name" />
+        <p>{{ destination.description }} </p>
+      </div>
+    </section>
+
+    <section v-if="experiences" class="experiences">
+      <h2>Top Experiences in {{ destination.name }}</h2>
+      <p>Check out these awesome experiences</p>
+      <div class="cards">
+        <router-link v-for="experience in experiences" :key="experience.slug" :to="{
+          name: 'experience.details',
+          params: {
+            experienceSlug: experience.slug,
+            id: destination.id
+          }
+        }" :title="experience.name" :aria-label="`View details for ${experience.name}`">
+          <ExperienceCard :experience="experience" />
+        </router-link>
+      </div>
+      <router-view />
+    </section>
+
+  </div>
 </template>
 
 <script>
