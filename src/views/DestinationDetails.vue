@@ -5,12 +5,15 @@
       <img :src="`/images/${destination.image}`" :alt="destination.name" />
       <p>{{ destination.description }} </p>
     </div>
+  </section>
 
-    <ul v-if="experiences" class="experience">
+  <section v-if="experiences" class="experiences">
+    <h2>Top Experiences in {{ destination.name }}</h2>
+    <p>Check out these awesome experiences</p>
+    <ul class="experience">
       <li v-for="experience in experiences" :key="experience.id">
         <h3>
           {{ experience.name }}
-
         </h3>
         {{ experience.description }}
         <img :src="`/images/${experience.image}`" :alt="experience.name" />
