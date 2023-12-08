@@ -10,25 +10,30 @@
   <section v-if="experiences" class="experiences">
     <h2>Top Experiences in {{ destination.name }}</h2>
     <p>Check out these awesome experiences</p>
-    <ul class="experience">
-      <li v-for="experience in experiences" :key="experience.id">
-        <h3>
-          {{ experience.name }}
-        </h3>
-        {{ experience.description }}
-        <img :src="`/images/${experience.image}`" :alt="experience.name" />
-      </li>
-    </ul>
+    <div class="cards">
+      <router-link v-for="experience in experiences" :key="experience.slug" :to="{
+        name: 'experience.details',
+        params: {
+          experienceSlug: experience.slug,
+          id: destination.id
+        }
+      }" :title="experience.name" :aria-label="`View details for ${experience.name}`">
+        <ExperienceCard :experience="experience" />
+      </router-link>
+    </div>
   </section>
 </template>
-
 
 <script>
 import sourceData from '@/data.json'
 import { stringifyQuery } from 'vue-router'
+import ExperienceCard from '@/components/ExperienceCard.vue'
 
 export default {
   name: "DestinationDetails",
+  components: {
+    ExperienceCard
+  },
   props: {
     id: {
       type: Number,
