@@ -1,6 +1,8 @@
 <template>
   <section v-if="destination" :class="destination.name.toLowerCase()" class="destination">
     <h1>{{ destination.name }}</h1>
+    <GoBack />
+
     <div class="destination-details">
       <img :src="`/images/${destination.image}`" :alt="destination.name" />
       <p>{{ destination.description }} </p>
@@ -21,6 +23,7 @@
         <ExperienceCard :experience="experience" />
       </router-link>
     </div>
+    <router-view />
   </section>
 </template>
 
@@ -28,11 +31,13 @@
 import sourceData from '@/data.json'
 import { stringifyQuery } from 'vue-router'
 import ExperienceCard from '@/components/ExperienceCard.vue'
+import GoBack from '@/components/GoBack.vue'
 
 export default {
   name: "DestinationDetails",
   components: {
-    ExperienceCard
+    ExperienceCard,
+    GoBack
   },
   props: {
     id: {

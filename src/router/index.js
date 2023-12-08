@@ -17,17 +17,19 @@ const routes = [
       const slug = route.params.slug;
       return { id, slug };
     },
-  },
-  {
-    path: "/destination/:id/:slug/:experienceSlug",
-    name: "experience.details",
-    component: () => import("@/views/ExperienceDetails.vue"),
-    props: (route) => {
-      const id = parseInt(route.params.id);
-      const slug = route.params.slug;
-      const experienceSlug = route.params.experienceSlug;
-      return { ...route.params, id, slug, experienceSlug };
-    },
+    children: [
+      {
+        path: ":experienceSlug",
+        name: "experience.details",
+        component: () => import("@/views/ExperienceDetails.vue"),
+        props: (route) => {
+          const id = parseInt(route.params.id);
+          const slug = route.params.slug;
+          const experienceSlug = route.params.experienceSlug;
+          return { ...route.params, id, slug, experienceSlug };
+        },
+      },
+    ],
   },
 ];
 
