@@ -19,9 +19,7 @@ export default {
     return {
       destinations: sourceData.destinations
     }
-
   }
-
 }
 </script>
 

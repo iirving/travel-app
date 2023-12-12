@@ -23,7 +23,6 @@ export default {
 
 </script>
 
-
 <style lang="css">
 .fade-enter-active,
 .fade-leave-active {

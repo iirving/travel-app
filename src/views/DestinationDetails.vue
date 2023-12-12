@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <section v-if="destination" :class="destination.name.toLowerCase()" class="destination">
       <h1>{{ destination.name }}</h1>
       <GoBack />
@@ -80,6 +79,4 @@ export default {
   }
 
 }
-
-
 </script>
