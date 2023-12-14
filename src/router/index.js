@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
+import sourceData from "@/data.json";
 
 const routes = [
   { path: "/", name: "Home", component: Home },
@@ -16,6 +17,21 @@ const routes = [
       const id = Number(route.params.id);
       const slug = route.params.slug;
       return { id, slug };
+    },
+    beforeEnter: (to) => {
+      const exists = sourceData.destinations.find(
+        (destination) =>
+          destination.id === Number(to.params.id) &&
+          destination.slug === to.params.slug
+      );
+      if (!exists) {
+        return {
+          name: "NotFound",
+          params: { pathMatch: to.path.substring(1).split("/") },
+          query: to.query,
+          hash: to.hash,
+        };
+      }
     },
     children: [
       {
