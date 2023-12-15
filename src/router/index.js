@@ -10,6 +10,17 @@ const routes = [
     component: () => import("@/views/About.vue"),
   },
   {
+    path: "/protected",
+    name: "Protected",
+    component: () => import("@/views/Protected.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
     path: "/destination/:id/:slug",
     name: "destination.details",
     component: () => import("@/views/DestinationDetails.vue"),
@@ -58,8 +69,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    console.log("to", to, "from", from, "savedPosition", savedPosition);
-
     return (
       savedPosition ||
       new Promise((resolve) => {
@@ -69,6 +78,14 @@ const router = createRouter({
       })
     );
   },
+});
+
+router.beforeEach((to, from) => {
+  if (to.meta.requiresAuth && !window.user) {
+    return {
+      name: "Login",
+    };
+  }
 });
 
 export default router;

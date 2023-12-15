@@ -8,6 +8,7 @@
       {{ destination.name }}
 
     </router-link>
+    <router-link to="/protected">protected</router-link>
   </div>
 </template>
 
