@@ -2,6 +2,10 @@
   <div>
     <h1>Greetings, {{ username }}</h1>
     <button @click="logout">logout</button>
+    <br><br>
+    <button>
+      <router-link :to="{ name: 'Invoices' }">Invoices</router-link>
+    </button>
 
   </div>
 </template>

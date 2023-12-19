@@ -25,10 +25,11 @@ export default {
   methods: {
     login() {
       // fake authication
-      console.log('login', this.username);
       window.user = this.username;
       if (this.username === 'ian') {
-        this.$router.push({ name: 'Protected' })
+        const redirectPath = this.$route.query.redirect || '/Protected'
+        console.log('redirectPath', redirectPath, 'username', this.username);
+        this.$router.push(redirectPath)
       } else {
         window.user = null;
         this.username = "";

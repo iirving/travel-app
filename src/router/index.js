@@ -21,6 +21,12 @@ const routes = [
     component: () => import("@/views/Login.vue"),
   },
   {
+    path: "/invoices",
+    name: "Invoices",
+    component: () => import("@/views/Invoices.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/destination/:id/:slug",
     name: "destination.details",
     component: () => import("@/views/DestinationDetails.vue"),
@@ -84,6 +90,7 @@ router.beforeEach((to, from) => {
   if (to.meta.requiresAuth && !window.user) {
     return {
       name: "Login",
+      query: { redirect: to.fullPath },
     };
   }
 });
