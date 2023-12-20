@@ -23,18 +23,24 @@ export default {
     }
   },
   methods: {
+    isAuthenticated(username, password) {
+      const validUser = 'ian'
+      if (this.username === validUser) {
+        window.user = username;
+        return true;
+      }
+      window.user = null;
+      this.username = "";
+      return false
+    },
     login() {
-      // fake authication
-      window.user = this.username;
-      if (this.username === 'ian') {
-        const redirectPath = this.$route.query.redirect || '/Protected'
-        console.log('redirectPath', redirectPath, 'username', this.username);
-        this.$router.push(redirectPath)
-      } else {
-        window.user = null;
-        this.username = "";
-        this.$router.push({ name: 'Home' })
-
+      if (this.username !== '') {
+        if (this.isAuthenticated(this.username, this.password)) {
+          const redirectPath = this.$route.query.redirect || '/Protected'
+          this.$router.push(redirectPath)
+        } else {
+          this.$router.push({ name: 'Home' })
+        }
       }
     }
   }
