@@ -13,36 +13,40 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 export default {
   name: 'Login',
-  data() {
-    return {
-      username: '',
-      password: ''
+  setup() {
+    const username = ref('');
+    const password = ref('');
+    const route = useRoute();
+    const router = useRouter();
+
+    const login = () => {
+      let redirectPath = { name: 'Home' }
+      if (username.value !== '') {
+        if (isAuthenticated(username.value, password.value)) {
+          redirectPath = route.query.redirect || '/Protected'
+        }
+        router.push(redirectPath)
+      }
     }
-  },
-  methods: {
-    isAuthenticated(username, password) {
+
+    const isAuthenticated = (username, password) => {
       const validUser = 'ian'
-      if (this.username === validUser) {
+      // a better way to do this would be to use a service to authenticate
+      if (username === validUser) {
         window.user = username;
         return true;
       }
       window.user = null;
-      this.username = "";
+      username = "";
       return false
-    },
-    login() {
-      if (this.username !== '') {
-        if (this.isAuthenticated(this.username, this.password)) {
-          const redirectPath = this.$route.query.redirect || '/Protected'
-          this.$router.push(redirectPath)
-        } else {
-          this.$router.push({ name: 'Home' })
-        }
-      }
     }
+
+    return { username, password, login }
   }
 }
 </script>
