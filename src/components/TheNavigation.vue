@@ -1,14 +1,15 @@
 <template>
   <div id="nav">
-    <router-link id="logo" to="/">Travel App</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link v-for="destination in  destinations" :key="destination.id"
+    <AppLink id="logo" to="/">Travel App</AppLink>
+    <AppLink to="/about">About</AppLink>
+    <AppLink v-for="destination in  destinations" :key="destination.id"
       :to="{ name: 'destination.details', params: { id: destination.id, slug: destination.slug } }">
 
       {{ destination.name }}
 
-    </router-link>
-    <router-link to="/protected">protected</router-link>
+    </AppLink>
+    <AppLink to="/protected">DashBoard</AppLink>
+    <AppLink to="https://FalsePositives.com">FalsePositives</AppLink>
   </div>
 </template>
 
@@ -19,8 +20,9 @@ export default {
   data() {
     return {
       destinations: sourceData.destinations
-    }
-  }
+    };
+  },
+  // components: { AppLink, AppLink }
 }
 </script>
 
