@@ -3,11 +3,20 @@ import Home from "@/views/Home.vue";
 import sourceData from "@/data.json";
 
 const routes = [
-  { path: "/", name: "Home", component: Home },
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+    alias: "/home",
+  },
   {
     path: "/about",
     name: "About",
     component: () => import("@/views/About.vue"),
+  },
+  {
+    path: "/me",
+    redirect: { name: "About" },
   },
   {
     path: "/protected",
