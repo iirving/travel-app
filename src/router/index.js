@@ -12,7 +12,10 @@ const routes = [
   {
     path: "/protected",
     name: "Protected",
-    component: () => import("@/views/Protected.vue"),
+    components: {
+      default: () => import("@/views/Protected.vue"),
+      LeftSideBar: () => import("@/components/LeftSidebar.vue"),
+    },
     meta: { requiresAuth: true },
   },
   {
@@ -23,7 +26,10 @@ const routes = [
   {
     path: "/invoices",
     name: "Invoices",
-    component: () => import("@/views/Invoices.vue"),
+    components: {
+      default: () => import("@/views/Invoices.vue"),
+      LeftSideBar: () => import("@/components/LeftSidebar.vue"),
+    },
     meta: { requiresAuth: true },
   },
   {
