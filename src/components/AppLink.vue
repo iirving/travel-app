@@ -1,3 +1,4 @@
+// component mounted in main.js
 <template>
   <a v-if="isExternal" :href="to" target="_blank" rel="noopener noreferrer">
     <slot />
